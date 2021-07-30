@@ -49,5 +49,5 @@ def create_database(*, app: Flask):
     """Creates the database if it doesn't already exists"""
     if not path.exists(f"website/{DB_NAME}"):
         db.create_all(app=app)
-        log.info(f"Created database called {DB_NAME}")
-    log.info(f"Database called {DB_NAME} already exists")
+        log.info(f"Created database called {DB_NAME!r}")
+    log.info(f"Database called {DB_NAME!r} already exists")
