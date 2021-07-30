@@ -1,3 +1,6 @@
+# log files
+*.log
+
 # flask_session folder which is automatically generated
 flask_session/
 
