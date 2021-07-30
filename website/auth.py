@@ -1,18 +1,21 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for
 
 auth = Blueprint("auth", __name__)
 
 
 @auth.route("/login")
 def home():
-    return "<h1>Login</h1>"
+    return render_template("login.html")
 
 
 @auth.route("/sign-up")
 def sign_up():
-    return "<h1>sign-up</h1>"
+    return render_template("signup.html")
 
 
 @auth.route("/logout")
 def login():
-    return "<h1>logout</h1>"
+    """Redirects the user to the home page
+    when the user clicks on the logout button
+    """
+    return redirect(url_for("views.home"))
