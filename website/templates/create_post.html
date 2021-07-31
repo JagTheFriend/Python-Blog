@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Create post{% endblock %}
 {% block content %}
 <h1 align="center">Make a post</h1>
 <form method="POST">
@@ -9,6 +9,11 @@
         <button type="submit" class="btn btn-lg btn-primary">
             Post
         </button>
+        <a href="/home">
+            <button type="button" class="btn btn-lg btn-secondary">
+                Back
+            </button>
+        </a>
     </div>
 </form>
 {% endblock %}
