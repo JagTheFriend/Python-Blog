@@ -20,7 +20,7 @@ def login():
 
         email = request.form.get("email")
         password = request.form.get("password")
-        user = User.query.filter_by(email=email).fist()
+        user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
                 log.info("Logged in")
@@ -42,9 +42,9 @@ def sign_up():
         log.debug("Received a 'POST' request on `/sign-up`")
         email = request.form.get("email")
         username = request.form.get("username")
-        password = request.form.get("password")
-        password1 = request.form.get("password1")
-
+        password = request.form.get("password1")
+        password1 = request.form.get("password2")
+        log.debug(f"Email: {email!r}, Password: {password!r}, Repeat password: {password1!r}")
         # check whether the email has a valid form
         if not findall(EMAIL_REGEX, email):
             flash("Invalid Email!", category="error")
