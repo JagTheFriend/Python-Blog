@@ -37,10 +37,10 @@ def create_app():
     login_manager.init_app(app)
 
     @login_manager.user_loader
-    def load_user(id_):
+    def load_user(id):
         """Allows to access the information about the user
         with that specific user ID"""
-        return User.query.get(int(id_))
+        return User.query.get(int(id))
 
     return app
 

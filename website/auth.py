@@ -76,7 +76,7 @@ def sign_up():
                 password=generate_password_hash(password)
             )
             db.session.add(new_user)
-            db.commit()
+            db.session.commit()
 
             log.debug("Created new user")
             login_user(new_user, remember=True)
