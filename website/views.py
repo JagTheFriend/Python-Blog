@@ -1,7 +1,8 @@
+from flask.helpers import url_for
 from . import db, log
 from website.models import Post
 
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, redirect
 from flask_login import login_required, current_user
 
 views = Blueprint("views", __name__)
@@ -12,7 +13,8 @@ views = Blueprint("views", __name__)
 @login_required
 def home():
     log.debug("Received a GET request at `/home`")
-    return render_template("home.html", user=current_user)
+    posts = Post.query.all()
+    return render_template("home.html", user=current_user, posts=posts)
 
 
 @views.route("/create-post", methods=["GET", "POST"])
@@ -28,5 +30,6 @@ def create_post():
             db.session.commit()
             log.info("Created post")
             flash("Post created!", category="success")
+            return redirect(url_for("views.home"))
 
     return render_template("create_post.html", user=current_user)
