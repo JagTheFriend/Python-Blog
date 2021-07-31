@@ -1,4 +1,38 @@
 {% extends "base.html" %}
-{% block title %}Welcome Back{% endblock %}
+{% block title %}Home{% endblock %}
 {% block content %}
+<h1 align="center">Posts</h1>
+    <div id="posts">
+        {% for post in posts %}
+            <!-- {{ post.text }} -->
+            <div class="card border-dark">
+                <!-- shows the username of the post -->
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <a href="/posts/{{ post.user.username }}">{{ post.user.username }}</a>
+
+                    {% if user.id == post.author %}
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/delete-post/{{ post.id }}" class="dropdown-item">Delete</a>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- shows the content of the post -->
+                <div class="card-body">
+                    <div class="card-text">{{ post.text }}</div>
+                </div>
+
+                <!-- shows the date the post was created -->
+                <div class="card-footer text-muted">
+                    {{ post.date_created }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
