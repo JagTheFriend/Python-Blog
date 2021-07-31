@@ -10,7 +10,7 @@ DB_NAME = "database.db"
 
 log.basicConfig(
     filename='app.log',
-    filemode='w',
+    filemode='a',
     format='%(name)s - %(levelname)s: %(message)s',
     level=log.DEBUG
 )
