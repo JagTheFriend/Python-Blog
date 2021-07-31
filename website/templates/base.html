@@ -25,11 +25,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                 <a class="nav-item nav-link" href="/home">Home</a>
-                <a class="nav-item nav-link" href="/login">Login</a>
-                <a class="nav-item nav-link" href="/sign-up">Signup</a>
+                {% if user.is_authenticated %}
+                    <!-- The user has logged in, so only the logout button would be shown -->
+                    <a class="nav-item nav-link" href="/logout">Logout</a>
+                {% else %}
+                    <!-- The user hasn't logged in, so only the
+                        sign up and login button would be shown
+                    -->
+                    <a class="nav-item nav-link" href="/login">Login</a>
+                    <a class="nav-item nav-link" href="/sign-up">Sign up</a>
+                {% endif %}
             </div>
         </div>
     </nav>
+    <!-- Show the alerts -->
     {% with messages = get_flashed_messages(with_categories=True) %}
         {% if messages %}
             {% for category, message in messages %}

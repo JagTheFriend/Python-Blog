@@ -5,7 +5,7 @@ from flask.helpers import flash
 from .models import User
 
 from flask import Blueprint, render_template, redirect, url_for, request
-from flask_login import login_user, login_required
+from flask_login import login_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -33,7 +33,7 @@ def login():
             flash("Email does not exists.", category="error")
 
     log.debug("Received GET request on `/login`")
-    return render_template("login.html")
+    return render_template("login.html", user=current_user)
 
 
 @auth.route("/sign-up", methods=["GET", "POST"])
@@ -86,7 +86,7 @@ def sign_up():
 
     # TODO: Add a way to verify the email
     log.debug("Received GET request on `/signup`")
-    return render_template("signup.html")
+    return render_template("signup.html", user=current_user)
 
 
 @auth.route("/logout")
