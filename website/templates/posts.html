@@ -1,5 +1,8 @@
-{% extends "base.html" %}
-{% block title %}Hello{% endblock %}
-{% block content %}
-<h1>Welcome back home!</h1>
+{% extends "posts_div.html" %}
+{% block title %}{{ user }}'s Post{% endblock %}
+{% block header %}
+    {{ user }}'s Post
+{% endblock %}
+
+{% block footer %}
 {% endblock %}

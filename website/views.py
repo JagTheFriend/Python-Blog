@@ -1,6 +1,6 @@
 from flask.helpers import url_for
 from . import db, log
-from website.models import Post
+from website.models import Post, User
 
 from flask import Blueprint, render_template, request, flash, redirect
 from flask_login import login_required, current_user
@@ -55,3 +55,16 @@ def delete_post(id):
         flash("Post deleted", category="success")
 
     return redirect(url_for("views.home"))
+
+
+@views.route("/posts/<username>")
+@login_required
+def posts(username):
+    # check whether the username exists
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        flash("No user with that username exists", category="error")
+        return redirect(url_for("views.home"))
+
+    posts = Post.query.filter_by(author=user.id).all()
+    return render_template("posts.html", user=username, posts=posts)
