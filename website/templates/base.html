@@ -30,7 +30,23 @@
             </div>
         </div>
     </nav>
-
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+               {% if category == "error" %}
+                    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% else %}
+                    <div class="alert alert-success alter-dismissable fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <div class="container">{% block content %}{% endblock %}</div>
     <!-- https://getbootstrap.com/docs/5.0/components/navbar/#supported-content -->
     <!-- JavaScript Bundle with Popper -->
