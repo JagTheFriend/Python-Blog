@@ -1,4 +1,6 @@
-from . import log
+from . import db, log
+from website.models import Post
+
 from flask import Blueprint, render_template, request, flash
 from flask_login import login_required, current_user
 
@@ -21,6 +23,10 @@ def create_post():
         if not text:  # there is no text
             flash("Post cannot be empty", category="error")
         else:
+            post = Post(text=text, author=current_user.id)
+            db.session.add(post)
+            db.session.commit()
+            log.info("Created post")
             flash("Post created!", category="success")
 
     return render_template("create_post.html", user=current_user)
