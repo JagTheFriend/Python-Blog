@@ -54,8 +54,8 @@ def sign_up():
             flash("Email is already in use.", category="error")
 
         # check whether usename exists
-        # elif User.query.filter_by(username=username).first():
-        #     flash("Username is already in use.", category="error")
+        elif User.query.filter_by(username=username).first():
+            flash("Username is already in use.", category="error")
 
         # the passwords don't match
         elif password1 != password:
