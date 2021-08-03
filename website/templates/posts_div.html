@@ -5,6 +5,16 @@
 <h1 align="center">
     {% block header %}Posts{% endblock %}
 </h1>
+
+<div align="center">
+    <!-- to create a post -->
+    <a href="/create-post">
+        <button type="button" class="btn btn-primary btn-lg">
+            Create a Post
+        </button>
+    </a>
+</div>
+<br />
 <div id="posts">
     {% for post in posts %}
     <div class="card border-dark">
@@ -76,13 +86,5 @@
     {% endfor %}
 </div>
 {% block footer %}
-<div align="center">
-    <!-- to create a post -->
-    <a href="/create-post">
-        <button type="button" class="btn btn-primary btn-lg">
-            Create a Post
-        </button>
-    </a>
-</div>
 {% endblock %}
 {% endblock %}
