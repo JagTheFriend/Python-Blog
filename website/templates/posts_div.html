@@ -22,7 +22,9 @@
                     <a href="/posts/{{post.user.username}}">{{post.user.username}}</a>
                     <div>
                         {{ post.likes|length }}
-                        <i class="fas fa-thumbs-up"></i>
+                        <a href="/like-post/{{ post.id }}">
+                            <i class="fas fa-thumbs-up"></i>
+                        </a>
                         {% if user.id == post.author %}
                             <!-- to allow post to be deleted -->
                             <div class="btn-group">

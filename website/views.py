@@ -1,6 +1,6 @@
 from flask.helpers import url_for
 from . import db, log
-from website.models import Comment, Post, User
+from website.models import Comment, Like, Post, User
 
 from flask import Blueprint, render_template, request, flash, redirect
 from flask_login import login_required, current_user
@@ -105,3 +105,26 @@ def delete_comment(comment_id):
         db.session.commit()
 
     return redirect(url_for('views.home'))
+
+
+@views.route("/like-post/<post_id>", methods=["GET"])
+@login_required
+def like(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+    like = Like.query.filter_by(author=current_user.id, post_id=post_id).first()
+
+    if not post:
+        flash("Post does not exist.", category="error")
+
+    # unlike the post of the user has already liked the post
+    elif like:
+        db.session.delete(like)
+        db.session.commit()
+
+    # like the post if the user hasn't already liked the post
+    else:
+        like = Like(author=current_user.id, post_id=post_id)
+        db.session.add(like)
+        db.session.commit()
+
+    return redirect(url_for("views.home"))
