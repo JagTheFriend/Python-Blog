@@ -22,9 +22,18 @@
                     <a href="/posts/{{post.user.username}}">{{post.user.username}}</a>
                     <div>
                         {{ post.likes|length }}
-                        <a href="/like-post/{{ post.id }}">
-                            <i class="fas fa-thumbs-up"></i>
-                        </a>
+                        <!-- check whether the user has liked the post -->
+                        {% if user.id in post.likes|map(attribute="author")|list %}
+                            <a href="/like-post/{{ post.id }}">
+                                <i class="fas fa-thumbs-up"></i>
+                            </a>
+                        <!-- the user hasn't liked the post -->
+                        {% else %}
+                            <a href="/like-post/{{ post.id }}">
+                                <i class="far fa-thumbs-up"></i>
+                            </a>
+                        {% endif %}
+
                         {% if user.id == post.author %}
                             <!-- to allow post to be deleted -->
                             <div class="btn-group">
